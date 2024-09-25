@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Fresh Cart</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="add_picture">Add Profile Picture\n</string>
+    <string name="new_to_fresh_cart_sign_up">New to Fresh Cart? Sign up</string>
+    <string name="forgot_password">Forgot Password?</string>
+    <string name="enter_email_id_mobile">Enter Email ID / Mobile</string>
+    <string name="enter_password">Enter Password</string>
+    <string name="freshcart">Fresh Cart</string>
+    <string name="login">Login</string>
+    <string name="add_products_to_inventory">Add Products to Inventory</string>
+</resources>

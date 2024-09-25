@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".fragments.appfragments.accountfragments.OrderHistoryFragment">
+
+    <com.google.android.material.appbar.MaterialToolbar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimaryDark"
+        app:title="My Orders"
+        android:id="@+id/orderHistoryNavigationIcon"
+        app:navigationIcon="@drawable/arrow_back_24px"
+        app:navigationIconTint="@color/white"
+        app:titleTextColor="@color/white"/>
+   <com.google.android.material.button.MaterialButton
+       android:layout_marginTop="10dp"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:layout_marginStart="10dp"
+       android:layout_marginEnd="10dp"
+       style="@style/Widget.Material3.Button.OutlinedButton.Icon"
+       app:icon="@drawable/arrow_forward_ios_24px"
+       app:iconGravity="end"
+       android:textAlignment="center"
+       app:cornerRadius="4dp"
+       android:id="@+id/noSubscriptionButton"
+       android:text="One Time Orders"/>
+    <com.google.android.material.button.MaterialButton
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        style="@style/Widget.Material3.Button.OutlinedButton.Icon"
+        app:icon="@drawable/arrow_forward_ios_24px"
+        app:iconGravity="end"
+        android:textAlignment="center"
+        app:cornerRadius="4dp"
+        android:id="@+id/dailySubscriptionButton"
+        android:text="Daily Orders"/>
+    <com.google.android.material.button.MaterialButton
+        android:layout_width="match_parent"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_height="wrap_content"
+        style="@style/Widget.Material3.Button.OutlinedButton.Icon"
+        app:icon="@drawable/arrow_forward_ios_24px"
+        app:iconGravity="end"
+        android:textAlignment="center"
+        app:cornerRadius="4dp"
+        android:id="@+id/weeklySubscriptionButton"
+        android:text="Weekly Orders"/>
+    <com.google.android.material.button.MaterialButton
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        style="@style/Widget.Material3.Button.OutlinedButton.Icon"
+        app:icon="@drawable/arrow_forward_ios_24px"
+        app:iconGravity="end"
+        android:textAlignment="center"
+        app:cornerRadius="4dp"
+        android:id="@+id/monthlySubscriptionButton"
+        android:text="Monthly Orders"/>
+
+</LinearLayout>

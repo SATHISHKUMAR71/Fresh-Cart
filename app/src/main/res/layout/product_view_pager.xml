@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:orientation="vertical"
+    android:padding="10dp"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/imageViewProductViewPager"
+        android:layout_width="100dp"
+        android:layout_height="120dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/grains_and_pulses"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:layout_width="100dp"
+        android:ellipsize="end"
+        android:gravity="center"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:id="@+id/productNameOrderSummary"
+        android:text="Product Name"
+        android:maxLines="2"
+        android:textSize="14sp"/>
+    <TextView
+        android:layout_width="100dp"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:id="@+id/productQuantityOrderSummary"
+        android:layout_height="wrap_content"
+        android:maxLines="1"
+        android:textSize="14sp"
+        android:text="100 grams"/>
+    <LinearLayout
+        android:layout_width="100dp"
+        android:gravity="center"
+        android:layout_height="wrap_content">
+    <TextView
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:background="@android:color/transparent"
+        android:text="2"
+        android:id="@+id/count"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageViewProductViewPager" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:text=" Items"
+            android:layout_gravity="center"
+            android:textSize="14sp" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="100dp"
+        android:gravity="center"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:id="@+id/priceInOrderSummary"
+            android:text="200 rs"
+            android:layout_gravity="center"
+            android:textSize="14sp" />
+        <TextView
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:background="@android:color/transparent"
+            android:text=" each"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageViewProductViewPager" />
+    </LinearLayout>
+</LinearLayout>

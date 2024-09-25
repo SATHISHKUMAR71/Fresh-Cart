@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:id="@+id/productImageView"
+    android:layout_width="match_parent"
+    android:layout_height="500dp"
+    android:orientation="horizontal"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <ImageView
+        android:id="@+id/productImage"
+        android:layout_width="match_parent"
+        android:layout_margin="20dp"
+        android:layout_height="match_parent"
+        android:src="@drawable/grains_and_pulses"
+        android:scaleType="fitXY"/>
+</LinearLayout>
+

@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_marginTop="80dp"
+    android:layout_marginBottom="80dp"
+    android:layout_height="match_parent"
+    tools:context=".fragments.appfragments.OfferFragment">
+
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:layout_width="match_parent"
+            app:contentScrim="@android:color/transparent"
+            android:layout_height="wrap_content"
+            app:layout_scrollFlags="scroll|enterAlways">
+            <LinearLayout
+                android:id="@+id/linearLayout15"
+                android:layout_width="match_parent"
+                app:layout_collapseMode="pin"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:layout_editor_absoluteX="10dp">
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/sortButton"
+                    style="@style/Widget.Material3.Button.IconButton.Filled.Tonal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
+                    android:layout_weight="0.5"
+                    android:text="Sort"
+                    app:cornerRadius="4dp" />
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:layout_marginStart="10dp">
+                    <com.google.android.material.button.MaterialButton
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        style="@style/Widget.Material3.Button.IconButton.Filled.Tonal"
+                        android:id="@+id/filterButton"
+                        android:text="Filter"
+                        app:cornerRadius="4dp"
+                        android:layout_marginStart="10dp"
+                        android:layout_weight="0.5"/>
+
+                    <TextView
+                        android:id="@+id/filterCountTextViewOffer"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/custom_badge"
+                        android:textAlignment="center"
+                        android:gravity="center"
+                        android:padding="1dp"
+                        android:textSize="12sp"
+                        android:text="20"
+                        android:textColor="@color/white"
+                        app:layout_constraintEnd_toEndOf="@+id/filterButton"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+                </LinearLayout>
+            </com.google.android.material.appbar.CollapsingToolbarLayout>
+        </com.google.android.material.appbar.AppBarLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:id="@+id/noItemsFoundText"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:layout_marginTop="?attr/actionBarSize"
+        android:textSize="28sp"
+        android:text="No Items Available"/>
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:src="@drawable/no_item_found"
+        android:id="@+id/noItemFoundImageOfferFragment"
+        android:layout_gravity="center"/>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/offerList"
+        android:layout_width="match_parent"
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout15" />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

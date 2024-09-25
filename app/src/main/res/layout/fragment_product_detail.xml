@@ -1,0 +1,285 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragments.appfragments.productfragments.ProductDetailFragment">
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent">
+        <com.google.android.material.appbar.MaterialToolbar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:titleTextColor="@color/white"
+            android:id="@+id/productDetailToolbar"
+            app:navigationIcon="@drawable/arrow_back_24px"
+            app:navigationIconTint="@color/white"
+            app:menu="@menu/product_detail_menu"
+            app:layout_scrollFlags="scroll|enterAlways|snap"
+            android:background="?attr/colorPrimaryDark" />
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="?attr/actionBarSize"
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+
+                <androidx.viewpager2.widget.ViewPager2
+                    android:id="@+id/productImageViewer"
+                    android:layout_width="match_parent"
+                    android:layout_height="350dp"/>
+                <com.google.android.material.tabs.TabLayout
+                    android:layout_width="match_parent"
+                    android:id="@+id/imageTabLayout"
+                    app:tabGravity="center"
+                    android:layout_gravity="bottom|center"
+                    app:tabIndicatorHeight="0dp"
+                    android:backgroundTint="@android:color/transparent"
+                    app:tabBackground="@drawable/tab_selector"
+                    app:tabSelectedTextColor="@android:color/transparent"
+                    app:tabTextColor="@android:color/transparent"
+                    android:layout_height="wrap_content"/>
+                <TextView
+                    android:id="@+id/brandNameProductDetail"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Brand Name of the Product"
+                    android:textSize="16sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/productImageView" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:id="@+id/productNameLayout"
+                    android:layout_marginStart="20dp"
+                    android:orientation="vertical"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/brandNameProductDetail">
+
+                    <TextView
+                        android:id="@+id/productNameProductDetail"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Product Name with Quantity"
+                        android:textSize="16sp"
+                        android:layout_marginBottom="10dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/brandNameProductDetail" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Product Desription"
+                        android:layout_marginBottom="10dp"
+                        android:id="@+id/productDescriptionProductDetail"/>
+                </LinearLayout>
+                <TextView
+                    android:layout_marginStart="20dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:id="@+id/productOffer"
+                    android:background="@color/offerColor"
+                    android:textSize="22sp"
+                    android:text="13% Off"
+                    android:textColor="@color/white"/>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:id="@+id/priceDetail"
+                    android:layout_marginBottom="10dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/productNameLayout">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:id="@+id/productPriceProductDetail"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="10dp"
+                            android:text="MRP ₹44"
+                            android:layout_gravity="center"
+                            android:textSize="18sp"
+                            app:layout_constraintStart_toEndOf="@+id/mrpTextProductDetail"
+                            app:layout_constraintTop_toBottomOf="@+id/productNameProductDetail" />
+
+                        <TextView
+                            android:layout_marginStart="10dp"
+                            android:id="@+id/discountedPrice"
+                            android:layout_gravity="center"
+                            android:textSize="22sp"
+                            android:textStyle="bold"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="MRP ₹44"/>
+                    </LinearLayout>
+                    <TextView
+                        android:id="@+id/productDiscountedPriceProductDetail"
+                        android:layout_width="wrap_content"
+                        android:visibility="gone"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:text="₹44"
+                        android:layout_gravity="center"
+                        android:textSize="22sp"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toEndOf="@+id/mrpTextProductDetail"
+                        app:layout_constraintTop_toBottomOf="@+id/productNameProductDetail" />
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_marginBottom="10dp"
+                    android:id="@+id/linearLayout7"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:orientation="horizontal"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/priceDetail">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:src="@drawable/history_24px" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/expiryDateProductDetail"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Expiry Date"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/manufactureDateProductDetail"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Manufactured Date" />
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/similarProductsLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintTop_toBottomOf="@+id/linearLayout7">
+                    <TextView
+                        android:layout_marginTop="20dp"
+                        android:padding="10dp"
+                        android:textStyle="bold"
+                        android:layout_marginBottom="20dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="You May Also Like"/>
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/productListInProductDetailFragment"
+                        android:paddingBottom="20dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginBottom="?attr/actionBarSize">
+                    </androidx.recyclerview.widget.RecyclerView>
+                </LinearLayout>
+
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+    <LinearLayout
+        android:background="@color/white"
+        android:id="@+id/exploreBottomLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom">
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/categoryButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            style="@style/Widget.Material3.Button.TextButton"
+            android:text="Buy More From Categories"
+            app:rippleColor="?attr/colorControlHighlight"
+            android:layout_weight="1"
+            app:cornerRadius="8dp" />
+        <LinearLayout
+            android:id="@+id/productAddRemoveLayoutProductDetail"
+            android:layout_width="110dp"
+            android:layout_weight="0.5"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="@+id/linearLayout9"
+            app:layout_constraintTop_toBottomOf="@+id/productExpiryDate">
+            <ImageButton
+                android:id="@+id/productRemoveSymbolButtonProductDetail"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:padding="10dp"
+                android:backgroundTint="?attr/colorPrimaryDark"
+                android:src="@drawable/remove_24px" />
+            <TextView
+                android:id="@+id/totalItemsAddedProductDetail"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:clickable="true"
+                android:focusable="true"
+                android:padding="10dp"
+                android:gravity="center"
+                android:text="000"
+                android:textAlignment="center"
+                android:textColor="?attr/colorPrimary"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+            <ImageButton
+                android:id="@+id/productAddSymbolButtonProductDetail"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:padding="10dp"
+                android:backgroundTint="?attr/colorPrimaryDark"
+                android:src="@drawable/add_24px" />
+        </LinearLayout>
+        <com.google.android.material.button.MaterialButton
+            android:layout_weight="0.5"
+            android:padding="10dp"
+            android:visibility="gone"
+            android:id="@+id/addProductButtonProductDetail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:cornerRadius="8dp"
+            android:layout_marginEnd="10dp"
+            android:text="Add Product" />
+
+    </LinearLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

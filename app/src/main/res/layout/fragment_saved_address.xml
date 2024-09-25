@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    tools:context=".fragments.appfragments.accountfragments.SavedAddress">
+
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/savedAddressToolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimaryDark"
+        app:navigationIcon="@drawable/arrow_back_24px"
+        app:navigationIconTint="@color/white"
+        app:title="Saved Address"
+        app:titleCentered="true"
+        app:titleTextColor="@color/white"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_margin="10dp"
+        android:layout_height="wrap_content">
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/addNewAddress"
+            android:layout_width="match_parent"
+            app:cornerRadius="4dp"
+            android:layout_height="wrap_content"
+            style="@style/Widget.Material3.Button"
+            android:elevation="4dp"
+            app:icon="@drawable/add_24px"
+            android:text="Add New Address"/>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/countAddress"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="No of Saved Address" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/savedAddressList"/>
+
+</LinearLayout>
