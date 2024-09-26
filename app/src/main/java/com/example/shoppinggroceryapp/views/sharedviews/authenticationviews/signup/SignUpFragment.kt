@@ -76,8 +76,9 @@ class SignUpFragment : Fragment() {
         initClickListeners()
 
         if(MainActivity.isRetailer){
-            signUpTopbar.title = "Add New Admin"
+            signUpTopbar.title = "Add New Retailer"
             isRetailer = true
+            signUp.text = "Add Retailer"
         }
 
         imageHandler.gotImage.observe(viewLifecycleOwner){
