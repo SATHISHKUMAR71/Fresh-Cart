@@ -31,8 +31,6 @@ interface UserDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun addUser(user: User):Long
 
-    @Query("SELECT * FROM Product WHERE categoryName IN (:categoryNames)")
-    fun getProductsBySelectedCategories(categoryNames: List<String>): List<Product>
 
 
     @Query("SELECT productId FROM Product Where productId=1")
@@ -43,12 +41,6 @@ interface UserDao {
 
     @Query("SELECT * FROM SearchHistory Where SearchHistory.userId=:userId")
     fun getSearchHistory(userId: Int):List<SearchHistory>
-
-    @Query("SELECT * FROM RecentlyViewedItems")
-    fun getRecentlyViewedItems():List<RecentlyViewedItems>
-
-    @Delete
-    fun deleteViewedItems(recentlyViewedItems: RecentlyViewedItems)
 
     @Query("SELECT RecentlyViewedItems.productId FROM RecentlyViewedItems Where userId=:user")
     fun getRecentlyViewedProducts(user:Int):List<Int>
@@ -65,23 +57,12 @@ interface UserDao {
     @Query("SELECT * FROM Address WHERE (Address.userId=:userId)")
     fun getAddressListForUser(userId:Int):List<Address>
 
-    @Query("SELECT * FROM USER")
-    fun getAllUsers():List<User>
-
-    @Query("SELECT * FROM Address")
-    fun getAllAddress():List<Address>
-
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun addCustomerRequest(customerRequest: CustomerRequest)
 
-    @Query("SELECT * FROM CustomerRequest")
-    fun getDataFromCustomerReq():List<CustomerRequest>
 
     @Query("SELECT CustomerRequest.helpId,CustomerRequest.userId,CustomerRequest.requestedDate,CustomerRequest.orderId,CustomerRequest.request,User.userFirstName,User.userLastName,User.userEmail,User.userPhone FROM CustomerRequest JOIN User ON User.userId=CustomerRequest.userId ORDER BY CustomerRequest.helpId DESC")
     fun getDataFromCustomerReqWithName():List<CustomerRequestWithName>
-
-//    @Query("SELECT Product.* FROM Cart Join Product ON Product.productId = Cart.productId WHERE Cart.cartId=:cartId")
-//    fun getProductsByCartIdLiveData(cartId:Int):LiveData<MutableList<Product>>
 
     @Query("SELECT * FROM Product Order By productId DESC")
     fun getOnlyProducts():List<Product>
@@ -289,12 +270,7 @@ interface UserDao {
     @Query("SELECT * FROM OrderDetails WHERE OrderDetails.cartId=:cartId")
     fun getOrder(cartId:Int):OrderDetails
 
-    @Query("SELECT * FROM OrderDetails WHERE OrderDetails.orderId=:orderId")
-    fun getOrderWithOrderId(orderId:Int):OrderDetails
 
-    @Query("SELECT OrderDetails.*,Product.mainImage AS mainImage,Product.productName AS productName,Product.productDescription as productDescription,Cart.totalItems as totalItems," +
-            "Cart.unitPrice as unitPrice,Product.manufactureDate AS manufactureDate,Product.expiryDate as expiryDate,Product.productQuantity as productQuantity,BrandData.brandName as brandName FROM OrderDetails JOIN Cart ON Cart.cartId=OrderDetails.cartId JOIN Product ON Product.productId=Cart.productId JOIN BrandData ON BrandData.brandId=Product.brandId WHERE OrderDetails.cartId=:cartId")
-    fun getOrderWithProducts(cartId: Int):Map<OrderDetails,List<CartWithProductData>>
     @Query("SELECT OrderDetails.*,Product.mainImage AS mainImage,Product.productName AS productName,Product.productDescription as productDescription,Cart.totalItems as totalItems," +
             "Cart.unitPrice as unitPrice,Product.manufactureDate AS manufactureDate,Product.expiryDate as expiryDate,Product.productQuantity as productQuantity,BrandData.brandName as brandName FROM OrderDetails JOIN Cart ON Cart.cartId=OrderDetails.cartId JOIN Product ON Product.productId=Cart.productId JOIN BrandData ON BrandData.brandId=Product.brandId WHERE OrderDetails.orderId=:orderId")
     fun getOrderWithProductsWithOrderId(orderId: Int):Map<OrderDetails,List<CartWithProductData>>

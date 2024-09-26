@@ -32,10 +32,6 @@ interface ProductDao:UserDao{
     fun getParentCategoryList():List<ParentCategory>
 
 
-
-//    @Query("SELECT ParentCategory.*,Category.categoryName FROM ParentCategory JOIN Category ON Category.parentCategoryName=ParentCategory.parentCategoryName")
-//    fun getParentWithChildName():List<ParentCategoryWithChildName>
-
     @Query("SELECT Category.categoryName FROM Category Where Category.parentCategoryName=:parent")
     fun getChildName(parent:String):List<ChildCategoryName>
 

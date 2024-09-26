@@ -96,7 +96,7 @@ class InitialFragment : Fragment() {
         // Inflate the layout for this fragment
 
         val view =  inflater.inflate(R.layout.fragment_initial, container, false)
-
+        val initialViewModel = ViewModelProvider(this)[InitialFragmentViewModel::class.java]
         var searchViewModel = ViewModelProvider(this,
             SearchViewModelFactory(AppDatabase.getAppDatabase(requireContext()).getUserDao())
         )[SearchViewModel::class.java]
@@ -158,13 +158,7 @@ class InitialFragment : Fragment() {
         homeFragment = HomeFragment()
         val customerRequestListFragment = CustomerRequestListFragment()
         val pref = requireActivity().getSharedPreferences("freshCart", Context.MODE_PRIVATE)
-        userFirstName = pref.getString("userFirstName","User").toString()
-        userLastName = pref.getString("userLastName","User").toString()
-        userId = pref.getString("userId","userId").toString()
-        userEmail = pref.getString("userEmail","userEmail").toString()
-        userPhone = pref.getString("userPhone","userPhone").toString()
-        isRetailer = pref.getBoolean("isRetailer",false)
-        userImage = pref.getString("userProfile","userProfile").toString()
+        initialViewModel.setInitialDataForUser(pref)
         if(isRetailer){
             bottomNav.menu.clear()
             bottomNav.inflateMenu(R.menu.admin_menu)

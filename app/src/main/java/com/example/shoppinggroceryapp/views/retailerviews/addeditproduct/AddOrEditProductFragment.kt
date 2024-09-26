@@ -178,9 +178,7 @@ class AddOrEditProductFragment : Fragment() {
             rawExpiryDate = it.expiryDate
             rawManufactureDate = it.manufactureDate
             productManufactureDate.setText(DateGenerator.getDayAndMonth(it.manufactureDate))
-//            productManufactureDate.setText(it.manufactureDate)
             productExpiryDate.setText(DateGenerator.getDayAndMonth(it.expiryDate))
-//            productExpiryDate.setText(it.expiryDate)
         }
 
         addEditProductViewModel.categoryImage.observe(viewLifecycleOwner){
@@ -261,12 +259,10 @@ class AddOrEditProductFragment : Fragment() {
 
         dateManufacturePicker.addOnPositiveButtonClickListener {
             rawManufactureDate = formatter.format(it)
-//            productManufactureDate.setText(formatter.format(it))
             productManufactureDate.setText(DateGenerator.getDayAndMonth(formatter.format(it)))
         }
         dateExpiryPicker.addOnPositiveButtonClickListener {
             rawExpiryDate = formatter.format(it)
-//            productExpiryDate.setText(formatter.format(it))
             productExpiryDate.setText(DateGenerator.getDayAndMonth(formatter.format(it)))
         }
 

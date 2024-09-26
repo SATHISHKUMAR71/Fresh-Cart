@@ -100,6 +100,7 @@ class CategoryFragment: Fragment() {
     override fun onDestroy() {
         super.onDestroy()
         MainCategoryAdapter.expandedData = mutableSetOf()
+        mainCategoryRV.adapter = null
     }
 
 }

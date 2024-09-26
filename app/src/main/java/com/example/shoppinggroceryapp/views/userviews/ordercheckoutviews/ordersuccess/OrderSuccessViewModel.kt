@@ -43,7 +43,6 @@ class OrderSuccessViewModel(var retailerDao: RetailerDao):ViewModel() {
             synchronized(lock) {
                 println(retailerDao.getOrder(cartId))
                 orderWithCart.postValue(retailerDao.getOrderWithProductsWithOrderId(cartId))
-//                orderWithCart.postValue(retailerDao.getOrderWithProducts(cartId))
             }
 
         }.start()
