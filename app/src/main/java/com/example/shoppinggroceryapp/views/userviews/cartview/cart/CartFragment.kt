@@ -104,18 +104,18 @@ class CartFragment : Fragment() {
                 priceDetails.visibility =View.VISIBLE
                 bottomLayout.visibility =View.VISIBLE
                 emptyCart.visibility = View.GONE
-                cartItemsSize = ProductListAdapter.productList.size
-                noOfItemsInt = ProductListAdapter.productList.size
+//                cartItemsSize = ProductListAdapter.productList.size
+                noOfItemsInt = ProductListAdapter.productsSize
                 val str = "MRP ($noOfItemsInt) Products"
                 noOfItems.text =str
             }
-            if(noOfItemsInt<=1){
-                bottomLayout.setBackgroundColor(Color.TRANSPARENT)
-                price.visibility = View.GONE
-            }
-            else{
-                price.visibility = View.VISIBLE
-            }
+//            if(noOfItemsInt<=1){
+//                bottomLayout.setBackgroundColor(Color.TRANSPARENT)
+//                price.visibility = View.GONE
+//            }
+//            else{
+//                price.visibility = View.VISIBLE
+//            }
             val str = "₹$it\nView Price Details"
             val grandTot = "₹$it"
             val totalAmt = "₹${it-49}"
@@ -163,15 +163,16 @@ class CartFragment : Fragment() {
             adapter.setProducts(it)
             noOfItemsInt = it.size
             val str = "MRP ($noOfItemsInt) Products"
+            price.visibility =View.VISIBLE
             noOfItems.text =str
-            if(noOfItemsInt<=1){
-                bottomLayout.setBackgroundColor(Color.TRANSPARENT)
-                price.visibility =View.GONE
-            }
-            else{
-                bottomLayout.setBackgroundColor(Color.WHITE)
-                price.visibility =View.VISIBLE
-            }
+//            if(noOfItemsInt<=1){
+//                bottomLayout.setBackgroundColor(Color.TRANSPARENT)
+//                price.visibility =View.GONE
+//            }
+//            else{
+//                bottomLayout.setBackgroundColor(Color.WHITE)
+//                price.visibility =View.VISIBLE
+//            }
         }
         addNewAddress.setOnClickListener {
             FragmentTransaction.navigateWithBackstack(parentFragmentManager, GetNewAddress(),"Add New Address")

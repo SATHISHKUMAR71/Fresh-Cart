@@ -35,9 +35,11 @@ class ProductListAdapter(var fragment: Fragment,
     private var userDb:UserDao = AppDatabase.getAppDatabase(fragment.requireContext()).getUserDao()
     private var retailerDb:RetailerDao = AppDatabase.getAppDatabase(fragment.requireContext()).getRetailerDao()
     companion object{
-        var productList:MutableList<Product> = mutableListOf()
+//        var productList:MutableList<Product> = mutableListOf()
+        var productsSize = 0
     }
     var size = 0
+    var productList:MutableList<Product> = mutableListOf()
     private var countList = mutableListOf<Int>()
     init {
 //        setHasStableIds(true)
@@ -176,6 +178,7 @@ class ProductListAdapter(var fragment: Fragment,
                 val count = --countList[position]
                 val positionVal = calculateDiscountPrice(productList[position].price, productList[position].offer)
                 if (count == 0) {
+                    productsSize--
                     if (tag == "P" || tag == "O") {
                         Thread {
                             val cart = userDb.getSpecificCart(
@@ -283,6 +286,7 @@ class ProductListAdapter(var fragment: Fragment,
             holder.productAddOneTime.setOnClickListener {
                 if (holder.absoluteAdapterPosition == position) {
                     val count = ++countList[position]
+                    productsSize++
                     holder.totalItems.text = count.toString()
                     ProductListFragment.totalCost.value =
                         ProductListFragment.totalCost.value!! + calculateDiscountPrice(productList[position].price, productList[position].offer)
@@ -318,7 +322,7 @@ class ProductListAdapter(var fragment: Fragment,
     }
 
     fun setProducts(newList:List<Product>){
-
+        productsSize = newList.size
         val diffUtil = CartItemsDiffUtil(productList,newList)
         for(i in 0..<newList.size){
             countList.add(i,0)
