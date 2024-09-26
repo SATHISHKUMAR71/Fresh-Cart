@@ -6,9 +6,8 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.sqlite.db.SupportSQLiteDatabase
-import com.example.shoppinggroceryapp.MIGRATION_4_5
 import com.example.shoppinggroceryapp.R
-import com.example.shoppinggroceryapp.views.ImageLoaderAndGetter
+import com.example.shoppinggroceryapp.helpers.imagehandlers.ImageLoaderAndGetter
 import com.example.shoppinggroceryapp.model.dao.ProductDao
 import com.example.shoppinggroceryapp.model.dao.RetailerDao
 import com.example.shoppinggroceryapp.model.dao.UserDao
@@ -376,7 +375,6 @@ abstract class AppDatabase:RoomDatabase(){
                     context.applicationContext,
                     AppDatabase::class.java,
                     "fresh_cart_database")
-                    .addMigrations(MIGRATION_4_5)
                     .addCallback(object : Callback(){
                         override fun onCreate(db: SupportSQLiteDatabase) {
                             super.onCreate(db)

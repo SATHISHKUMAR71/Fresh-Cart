@@ -14,8 +14,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.collection.LruCache
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import com.example.shoppinggroceryapp.views.appfragments.InitialFragment
-import com.example.shoppinggroceryapp.views.authentication.LoginFragment
+import com.example.shoppinggroceryapp.views.initialview.InitialFragment
+import com.example.shoppinggroceryapp.views.sharedviews.authenticationviews.login.LoginFragment
 import com.example.shoppinggroceryapp.model.dao.UserDao
 import com.example.shoppinggroceryapp.model.database.AppDatabase
 import com.example.shoppinggroceryapp.model.database.AppDatabase.Companion.getAppDatabase
@@ -58,14 +58,13 @@ class MainActivity : AppCompatActivity() {
         userPhone = pref.getString("userPhone","userPhone").toString()
         userImage = pref.getString("userProfile","userImage").toString()
         if(boo){
-            println("Initial Fragment Created From Activity")
             supportFragmentManager.beginTransaction()
                 .replace(R.id.fragmentBody, InitialFragment())
                 .commit()
         }
         else{
             supportFragmentManager.beginTransaction()
-                .add(R.id.fragmentBody,LoginFragment())
+                .add(R.id.fragmentBody, LoginFragment())
                 .commit()
         }
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {

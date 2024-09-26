@@ -6,7 +6,6 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Update
-import com.example.shoppinggroceryapp.TimeSlots
 import com.example.shoppinggroceryapp.model.entities.order.DailySubscription
 import com.example.shoppinggroceryapp.model.entities.order.MonthlyOnce
 import com.example.shoppinggroceryapp.model.entities.order.OrderDetails
@@ -19,7 +18,6 @@ import com.example.shoppinggroceryapp.model.entities.products.Images
 import com.example.shoppinggroceryapp.model.entities.products.ParentCategory
 import com.example.shoppinggroceryapp.model.entities.products.Product
 import com.example.shoppinggroceryapp.model.entities.recentlyvieweditems.RecentlyViewedItems
-import com.example.shoppinggroceryapp.model.entities.user.Address
 
 @Dao
 interface RetailerDao:UserDao {

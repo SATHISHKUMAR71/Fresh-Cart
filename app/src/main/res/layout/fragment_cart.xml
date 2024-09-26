@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginBottom="80dp"
-    tools:context=".views.userviews.CartFragment">
+    tools:context=".views.userviews.cartview.cart.CartFragment">
 
 
     <androidx.core.widget.NestedScrollView
