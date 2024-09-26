@@ -284,6 +284,9 @@ interface UserDao {
     @Delete
     fun removeProductInCart(cart: Cart)
 
+    @Query("SELECT BrandData.brandName FROM BrandData where BrandData.brandId=:id")
+    fun getBrandName(id:Long):String
+
     @Update
     fun updateCartMapping(cartMapping: CartMapping)
     @Query("SELECT * FROM Cart WHERE Cart.cartId=:cartId and Cart.productId=:productId")

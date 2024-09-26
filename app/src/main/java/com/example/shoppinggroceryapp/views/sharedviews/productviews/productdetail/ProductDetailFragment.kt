@@ -33,6 +33,8 @@ import com.example.shoppinggroceryapp.views.initialview.InitialFragment
 import com.example.shoppinggroceryapp.views.sharedviews.productviews.productlist.ProductListFragment
 import com.example.shoppinggroceryapp.views.sharedviews.productviews.adapter.ProductListAdapter
 import com.example.shoppinggroceryapp.views.sharedviews.productviews.adapter.ProductImageAdapter
+import com.example.shoppinggroceryapp.views.sharedviews.productviews.productlist.ProductListViewModel
+import com.example.shoppinggroceryapp.views.sharedviews.productviews.productlist.ProductListViewModelFactory
 import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.badge.BadgeDrawable
 import com.google.android.material.badge.BadgeUtils
@@ -92,6 +94,9 @@ class ProductDetailFragment : Fragment() {
         productDetailViewModel = ViewModelProvider(this,
             ProductDetailViewModelFactory(AppDatabase.getAppDatabase(requireContext()).getRetailerDao())
         )[ProductDetailViewModel::class.java]
+        var productListViewModel = ViewModelProvider(this,
+            ProductListViewModelFactory(AppDatabase.getAppDatabase(requireContext()).getUserDao())
+        )[ProductListViewModel::class.java]
         productDetailViewModel.getImagesForProducts(ProductListFragment.selectedProduct.value?.productId?:0)
         addProductButton = view.findViewById(R.id.addProductButtonProductDetail)
         totalItemsAddedProductDetail = view.findViewById(R.id.totalItemsAddedProductDetail)
@@ -213,7 +218,7 @@ class ProductDetailFragment : Fragment() {
                     this,
                     File(requireContext().filesDir, "AppImages"),
                     "P",
-                    true
+                    true,productListViewModel
                 )
                 recyclerView.adapter = adapter
                 val tmpList = mutableListOf<Product>()

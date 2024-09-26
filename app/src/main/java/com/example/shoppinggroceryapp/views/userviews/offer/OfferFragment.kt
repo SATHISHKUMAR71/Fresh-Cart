@@ -83,7 +83,9 @@ class OfferFragment : Fragment() {
         val sortButton = view.findViewById<MaterialButton>(R.id.sortButton)
         val filterButton = view.findViewById<MaterialButton>(R.id.filterButton)
         val fileDir = File(requireContext().filesDir,"AppImages")
-        adapter = ProductListAdapter(this,fileDir,"O",false)
+        adapter = ProductListAdapter(this,fileDir,"O",false,productListViewModel = ViewModelProvider(this,
+            ProductListViewModelFactory(AppDatabase.getAppDatabase(requireContext()).getUserDao())
+        )[ProductListViewModel::class.java])
         adapter.stateRestorationPolicy = RecyclerView.Adapter.StateRestorationPolicy.ALLOW
         offerViewModel = ViewModelProvider(this,
             OfferViewModelFactory(AppDatabase.getAppDatabase(requireContext()).getUserDao())

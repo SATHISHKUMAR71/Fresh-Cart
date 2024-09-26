@@ -32,13 +32,13 @@ class CustomerRequestDetailFragment : Fragment() {
         }
         view.findViewById<TextView>(R.id.customerName).text =
             CustomerRequestListFragment.customerName
-        var email = "Email: ${CustomerRequestListFragment.customerEmail}"
-        var phone = "Phone: ${CustomerRequestListFragment.customerPhone}"
+        val email = "Email: ${CustomerRequestListFragment.customerEmail}"
+        val phone = "Phone: ${CustomerRequestListFragment.customerPhone}"
         view.findViewById<TextView>(R.id.customerEmail).text = email
         view.findViewById<TextView>(R.id.customerPhone).text = phone
         view.findViewById<TextView>(R.id.customerRequestText).text =
             CustomerRequestListFragment.customerRequest
-        var requestedOn ="Requested On: ${CustomerRequestListFragment.requestedDate}"
+        val requestedOn ="Requested On: ${CustomerRequestListFragment.requestedDate}"
         view.findViewById<TextView>(R.id.requestedDate).text = requestedOn
         parentFragmentManager.beginTransaction()
             .replace(R.id.orderDetailsFragment,orderDetailFrag)

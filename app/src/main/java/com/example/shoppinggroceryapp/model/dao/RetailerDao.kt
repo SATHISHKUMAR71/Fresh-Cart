@@ -137,9 +137,6 @@ interface RetailerDao:UserDao {
     @Delete
     fun deleteProduct(product: Product)
 
-    @Query("SELECT BrandData.brandName FROM BrandData where BrandData.brandId=:id")
-    fun getBrandName(id:Long):String
-
     @Query("SELECT * FROM BrandData Where BrandData.brandName=:brandName")
     fun getBrandWithName(brandName:String):BrandData
 

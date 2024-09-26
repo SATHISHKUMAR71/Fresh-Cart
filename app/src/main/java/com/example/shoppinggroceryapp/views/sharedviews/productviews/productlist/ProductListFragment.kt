@@ -99,7 +99,7 @@ class ProductListFragment : Fragment() {
         val view =  inflater.inflate(R.layout.fragment_product_list, container, false)
         val sortAndFilterLayout = view.findViewById<LinearLayout>(R.id.linearLayout15)
         fileDir = File(requireContext().filesDir,"AppImages")
-        adapter = ProductListAdapter(this,fileDir,"P",false)
+        adapter = ProductListAdapter(this,fileDir,"P",false,productListViewModel)
         adapter.stateRestorationPolicy = RecyclerView.Adapter.StateRestorationPolicy.ALLOW
         filterCountText = view.findViewById(R.id.filterCountTextView)
         toolbar = view.findViewById<MaterialToolbar>(R.id.productListToolBar)

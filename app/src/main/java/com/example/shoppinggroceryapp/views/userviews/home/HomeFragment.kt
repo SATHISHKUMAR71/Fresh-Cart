@@ -22,6 +22,8 @@ import com.example.shoppinggroceryapp.views.sharedviews.filter.FilterFragment
 import com.example.shoppinggroceryapp.views.sharedviews.sort.BottomSheetDialogFragment
 import com.example.shoppinggroceryapp.model.database.AppDatabase
 import com.example.shoppinggroceryapp.model.entities.products.Product
+import com.example.shoppinggroceryapp.views.sharedviews.productviews.productlist.ProductListViewModel
+import com.example.shoppinggroceryapp.views.sharedviews.productviews.productlist.ProductListViewModelFactory
 import com.example.shoppinggroceryapp.views.userviews.category.CategoryFragment
 import com.example.shoppinggroceryapp.views.userviews.offer.OfferFragment
 import com.google.android.material.button.MaterialButton
@@ -77,7 +79,9 @@ class HomeFragment : Fragment() {
         )[HomeViewModel::class.java]
         recentItems = view.findViewById(R.id.recentlyViewedItemsHomeFrag)
         homeFragNestedScroll =  view.findViewById(R.id.nestedScrollViewHomeFrag)
-        var adapter = ProductListAdapter(this,File(requireContext().filesDir,"AppImages"),"P",true)
+        var adapter = ProductListAdapter(this,File(requireContext().filesDir,"AppImages"),"P",true,productListViewModel = ViewModelProvider(this,
+            ProductListViewModelFactory(AppDatabase.getAppDatabase(requireContext()).getUserDao())
+        )[ProductListViewModel::class.java])
         homeViewModel.getRecentlyViewedItems()
         recentItems.adapter = null
         adapter.setProducts(mutableListOf())

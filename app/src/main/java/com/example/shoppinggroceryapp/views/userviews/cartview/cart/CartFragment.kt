@@ -22,6 +22,8 @@ import com.example.shoppinggroceryapp.views.sharedviews.productviews.adapter.Pro
 import com.example.shoppinggroceryapp.model.database.AppDatabase
 import com.example.shoppinggroceryapp.model.entities.user.Address
 import com.example.shoppinggroceryapp.views.initialview.InitialFragment
+import com.example.shoppinggroceryapp.views.sharedviews.productviews.productlist.ProductListViewModel
+import com.example.shoppinggroceryapp.views.sharedviews.productviews.productlist.ProductListViewModelFactory
 import com.example.shoppinggroceryapp.views.userviews.category.CategoryFragment
 import com.example.shoppinggroceryapp.views.userviews.addressview.getaddress.GetNewAddress
 import com.example.shoppinggroceryapp.views.userviews.ordercheckoutviews.ordersummary.OrderSummaryFragment
@@ -80,7 +82,9 @@ class CartFragment : Fragment() {
             FragmentTransaction.navigateWithBackstack(parentFragmentManager, CategoryFragment(),"Added More Groceries")
         }
 
-        adapter = ProductListAdapter(this,fileDir,"C",false)
+        adapter = ProductListAdapter(this,fileDir,"C",false,productListViewModel = ViewModelProvider(this,
+            ProductListViewModelFactory(AppDatabase.getAppDatabase(requireContext()).getUserDao())
+        )[ProductListViewModel::class.java])
         adapter.setProducts(listOf())
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(requireContext())

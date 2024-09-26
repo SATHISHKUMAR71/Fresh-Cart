@@ -12,6 +12,7 @@ class ProductListViewModel(var userDao: UserDao):ViewModel() {
     var productList: MutableLiveData<List<Product>> = MutableLiveData()
     var productCategoryList: MutableLiveData<List<Product>> = MutableLiveData()
     var manufacturedSortedList:MutableLiveData<List<Product>> = MutableLiveData()
+    var cartListForProducts:MutableList<Cart?> = mutableListOf()
     fun getCartItems(cartId: Int) {
         Thread {
             cartList.postValue(userDao.getCartItems(cartId))
@@ -32,6 +33,31 @@ class ProductListViewModel(var userDao: UserDao):ViewModel() {
                 list = userDao.getProductsByName(category)
             }
             productCategoryList.postValue(list)
+        }.start()
+    }
+
+    fun getSpecificCart(cartId: Int,productId:Int,callback: (Cart?) -> Unit){
+        Thread{
+            val cartData:Cart? = (userDao.getSpecificCart(cartId,productId))
+            callback(cartData)
+        }.start()
+    }
+
+    fun getBrandName(brandId:Long,callbackBrand: (String?) -> Unit){
+        Thread{
+            callbackBrand(userDao.getBrandName(brandId))
+        }.start()
+    }
+
+    fun removeProductInCart(cart: Cart){
+        Thread{
+            userDao.removeProductInCart(cart)
+        }.start()
+    }
+
+    fun updateItemsInCart(cart: Cart){
+        Thread{
+            userDao.addItemsToCart(cart)
         }.start()
     }
 

@@ -32,6 +32,8 @@ import com.example.shoppinggroceryapp.views.initialview.InitialFragment
 import com.example.shoppinggroceryapp.views.sharedviews.orderviews.OrderHistoryFragment
 import com.example.shoppinggroceryapp.views.sharedviews.productviews.adapter.ProductListAdapter
 import com.example.shoppinggroceryapp.views.sharedviews.productviews.productlist.ProductListFragment
+import com.example.shoppinggroceryapp.views.sharedviews.productviews.productlist.ProductListViewModel
+import com.example.shoppinggroceryapp.views.sharedviews.productviews.productlist.ProductListViewModelFactory
 import com.example.shoppinggroceryapp.views.userviews.addressview.savedaddress.SavedAddressList
 import com.google.android.material.button.MaterialButton
 import java.io.File
@@ -105,7 +107,9 @@ class AccountFragment : Fragment() {
         recentlyPurchasedItems = view.findViewById(R.id.recentlyPurchasedItemsList)
         editUser.getPurchasedProducts(MainActivity.userId.toInt())
         val adapter = ProductListAdapter(this,
-            File(requireContext().filesDir,"AppImages"),"P",true)
+            File(requireContext().filesDir,"AppImages"),"P",true,productListViewModel = ViewModelProvider(this,
+                ProductListViewModelFactory(AppDatabase.getAppDatabase(requireContext()).getUserDao())
+            )[ProductListViewModel::class.java])
         editUser.recentlyBoughtList.observe(viewLifecycleOwner){
             if((it!=null)&&(it.isNotEmpty())){
                 if(recentlyPurchasedItems.adapter == null) {

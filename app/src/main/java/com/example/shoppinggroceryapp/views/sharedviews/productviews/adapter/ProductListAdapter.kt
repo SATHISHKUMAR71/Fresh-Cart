@@ -9,6 +9,7 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.shoppinggroceryapp.MainActivity
@@ -25,15 +26,18 @@ import com.example.shoppinggroceryapp.model.entities.order.Cart
 import com.example.shoppinggroceryapp.model.entities.products.Product
 import com.example.shoppinggroceryapp.views.sharedviews.productviews.productdetail.ProductDetailFragment
 import com.example.shoppinggroceryapp.views.sharedviews.productviews.productlist.ProductListFragment
+import com.example.shoppinggroceryapp.views.sharedviews.productviews.productlist.ProductListViewModel
+import com.example.shoppinggroceryapp.views.sharedviews.productviews.productlist.ProductListViewModelFactory
 import com.google.android.material.button.MaterialButton
 import java.io.File
 
 class ProductListAdapter(var fragment: Fragment,
                          private var file: File,
-                         private var tag:String,private var isShort:Boolean):RecyclerView.Adapter<ProductListAdapter.ProductLargeImageHolder>() {
+                         private var tag:String,private var isShort:Boolean,var productListViewModel: ProductListViewModel):RecyclerView.Adapter<ProductListAdapter.ProductLargeImageHolder>() {
 
     private var userDb:UserDao = AppDatabase.getAppDatabase(fragment.requireContext()).getUserDao()
     private var retailerDb:RetailerDao = AppDatabase.getAppDatabase(fragment.requireContext()).getRetailerDao()
+
     companion object{
 //        var productList:MutableList<Product> = mutableListOf()
         var productsSize = 0
@@ -42,7 +46,6 @@ class ProductListAdapter(var fragment: Fragment,
     var productList:MutableList<Product> = mutableListOf()
     private var countList = mutableListOf<Int>()
     init {
-//        setHasStableIds(true)
         for(i in 0..<productList.size){
             countList.add(i,0)
         }
@@ -95,8 +98,7 @@ class ProductListAdapter(var fragment: Fragment,
                 holder.buttonLayout.visibility = View.VISIBLE
             }
 
-            Thread{
-                val cart:Cart? = userDb.getSpecificCart(MainActivity.cartId, productList[position].productId.toInt())
+            productListViewModel.getSpecificCart(MainActivity.cartId,productList[position].productId.toInt()){cart ->
                 if(cart!=null){
                     MainActivity.handler.post {
                         holder.productAddOneTime.visibility = View.GONE
@@ -113,16 +115,11 @@ class ProductListAdapter(var fragment: Fragment,
                         holder.totalItems.text = "0"
                     }
                 }
-            }.start()
+            }
 
-            Thread{
-                val brand = AppDatabase.getAppDatabase(fragment.requireContext()).getRetailerDao().getBrandName(
-                    productList[position].brandId)
-                MainActivity.handler.post {
-                    holder.brandName.text = brand
-                }
-            }.start()
-
+            productListViewModel.getBrandName(productList[position].brandId){brand ->
+                holder.brandName.text = brand
+            }
             if(productList[position].offer>0f){
                 val str = "MRP ₹"+ productList[position].price
                 holder.productMrpText.text = str
@@ -180,67 +177,54 @@ class ProductListAdapter(var fragment: Fragment,
                 if (count == 0) {
                     productsSize--
                     if (tag == "P" || tag == "O") {
-                        Thread {
-                            val cart = userDb.getSpecificCart(
-                                MainActivity.cartId,
-                                productList[position].productId.toInt()
-                            )
-                            userDb.removeProductInCart(cart)
-                            MainActivity.handler.post {
-                                ProductListFragment.totalCost.value =
-                                    ProductListFragment.totalCost.value!! - positionVal
-                                CartFragment.viewPriceDetailData.value = CartFragment.viewPriceDetailData.value!! - positionVal
+                        productListViewModel.getSpecificCart(MainActivity.cartId,productList[position].productId.toInt()){cart ->
+                            if (cart != null) {
+                                productListViewModel.removeProductInCart(cart)
                             }
-                        }.start()
+                            ProductListFragment.totalCost.postValue(ProductListFragment.totalCost.value!! - positionVal)
+                            CartFragment.viewPriceDetailData.postValue(CartFragment.viewPriceDetailData.value!! - positionVal)
+                        }
                         FindNumberOfCartItems.productCount.value = FindNumberOfCartItems.productCount.value!!-1
                         holder.productAddRemoveLayout.visibility = View.GONE
                         holder.productAddOneTime.visibility = View.VISIBLE
                     } else if (tag == "C") {
-                        Thread {
-                            val cart = userDb.getSpecificCart(
-                                MainActivity.cartId,
-                                productList[position].productId.toInt()
-                            )
-                            productList.removeAt(position)
-                            countList.removeAt(position)
-                            userDb.removeProductInCart(cart)
-//                            CartFragment.cartItemsSize -= 1
-                            MainActivity.handler.post {
-                                CartFragment.viewPriceDetailData.value = CartFragment.viewPriceDetailData.value!! - positionVal
-                                notifyItemRemoved(position)
-                                notifyItemRangeChanged(position, productList.size)
+                        productListViewModel.getSpecificCart(MainActivity.cartId,productList[position].productId.toInt()){cart ->
+                            if (cart != null) {
+                                productListViewModel.removeProductInCart(cart)
                             }
-                        }.start()
+                            CartFragment.viewPriceDetailData.postValue(CartFragment.viewPriceDetailData.value!! - positionVal)
+                        }
+                        productList.removeAt(position)
+                        countList.removeAt(position)
+                        notifyItemRemoved(position)
+                        notifyItemRangeChanged(position, productList.size)
                         FindNumberOfCartItems.productCount.value = FindNumberOfCartItems.productCount.value!!-1
                     }
                     holder.totalItems.text = "0"
 
                 }
                 else {
-                    Thread {
-                        userDb.addItemsToCart(
-                            if(productList[position].offer==-1f) {
-                                Cart(
-                                    MainActivity.cartId,
-                                    productList[position].productId.toInt(),
-                                    count,
-                                    productList[position].price
-                                )
-                            }
-                            else
-                            { Cart(
-                                    MainActivity.cartId,
-                                    productList[position].productId.toInt(),
-                                    count,calculateDiscountPrice(
+//                        val product = productList[position].copy(availableItems = productList[position].availableItems+1)
+//                        retailerDb.updateProduct(product)
+                    productListViewModel.updateItemsInCart(
+                        if(productList[position].offer==-1f) {
+                            Cart(
+                                MainActivity.cartId,
+                                productList[position].productId.toInt(),
+                                count,
+                                productList[position].price
+                            )
+                        }
+                        else
+                        {
+                            Cart(
+                                MainActivity.cartId,
+                                productList[position].productId.toInt(),
+                                count,calculateDiscountPrice(
                                     productList[position].price,
                                     productList[position].offer)
-                                )
-                            }
-                        )
-                        val product = productList[position].copy(availableItems = productList[position].availableItems+1)
-                        retailerDb.updateProduct(product)
-
-                    }.start()
+                            )
+                        })
                     holder.totalItems.text = count.toString()
                     ProductListFragment.totalCost.value =
                         ProductListFragment.totalCost.value!! - positionVal
@@ -257,28 +241,24 @@ class ProductListAdapter(var fragment: Fragment,
                     ProductListFragment.totalCost.value!! + calculateDiscountPrice(productList[position].price, productList[position].offer)
                 CartFragment.viewPriceDetailData.value =
                     CartFragment.viewPriceDetailData.value!! + calculateDiscountPrice(productList[position].price, productList[position].offer)
-                Thread {
-                    userDb.addItemsToCart(
-                        if(productList[position].offer==-1f) {
-                            Cart(
-                                MainActivity.cartId,
-                                productList[position].productId.toInt(),
-                                count,
-                                productList[position].price
-                            )
-                        }
-                        else
-                        { Cart(
-                            MainActivity.cartId,
-                            productList[position].productId.toInt(),
-                            count,calculateDiscountPrice(
-                                productList[position].price,
-                                productList[position].offer)
-                        )
-                        }
+                var cart = if(productList[position].offer==-1f) {
+                    Cart(
+                        MainActivity.cartId,
+                        productList[position].productId.toInt(),
+                        count,
+                        productList[position].price
                     )
-                }.start()
-
+                }
+                else
+                { Cart(
+                    MainActivity.cartId,
+                    productList[position].productId.toInt(),
+                    count,calculateDiscountPrice(
+                        productList[position].price,
+                        productList[position].offer)
+                )
+                }
+                productListViewModel.updateItemsInCart(cart)
                 holder.totalItems.text = count.toString()
             }
         }
@@ -293,27 +273,24 @@ class ProductListAdapter(var fragment: Fragment,
                     CartFragment.viewPriceDetailData.value =
                         CartFragment.viewPriceDetailData.value!! + calculateDiscountPrice(
                             productList[position].price, productList[position].offer)
-                    Thread {
-                        userDb.addItemsToCart(
-                            if(productList[position].offer==-1f) {
-                                Cart(
-                                    MainActivity.cartId,
-                                    productList[position].productId.toInt(),
-                                    count,
-                                    productList[position].price
-                                )
-                            }
-                            else
-                            { Cart(
-                                MainActivity.cartId,
-                                productList[position].productId.toInt(),
-                                count,calculateDiscountPrice(
-                                    productList[position].price,
-                                    productList[position].offer)
-                            )
-                            }
+                    var cart = if(productList[position].offer==-1f) {
+                        Cart(
+                            MainActivity.cartId,
+                            productList[position].productId.toInt(),
+                            count,
+                            productList[position].price
                         )
-                    }.start()
+                    }
+                    else
+                    { Cart(
+                        MainActivity.cartId,
+                        productList[position].productId.toInt(),
+                        count,calculateDiscountPrice(
+                            productList[position].price,
+                            productList[position].offer)
+                    )
+                    }
+                    productListViewModel.updateItemsInCart(cart)
                     FindNumberOfCartItems.productCount.value = FindNumberOfCartItems.productCount.value!!+1
                     holder.productAddRemoveLayout.visibility = View.VISIBLE
                     holder.productAddOneTime.visibility = View.GONE
