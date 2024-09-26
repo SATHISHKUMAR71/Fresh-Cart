@@ -10,7 +10,7 @@ import com.example.shoppinggroceryapp.MainActivity.Companion.userImage
 import com.example.shoppinggroceryapp.MainActivity.Companion.userLastName
 import com.example.shoppinggroceryapp.MainActivity.Companion.userPhone
 
-class InitialFragmentViewModel:ViewModel() {
+class InitialDataSetter {
 
 
     fun setInitialDataForUser(pref:SharedPreferences){

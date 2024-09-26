@@ -55,18 +55,6 @@
             app:cornerRadius="4dp"/>
     </LinearLayout>
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/modifySubscriptionOrder"
-            style="@style/Widget.Material3.Button.IconButton.Filled.Tonal"
-            android:layout_width="wrap_content"
-            android:visibility="gone"
-            android:layout_marginEnd="10dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.1"
-            android:text="Change Subscription"
-            app:cornerRadius="4dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout14" />
 
         <LinearLayout
             android:id="@+id/shippingAddressDetails"
@@ -75,7 +63,7 @@
             android:layout_margin="10dp"
             android:orientation="vertical"
             android:paddingTop="10dp"
-            app:layout_constraintTop_toBottomOf="@+id/modifySubscriptionOrder"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout14"
             tools:layout_editor_absoluteX="10dp">
 
             <LinearLayout
@@ -175,7 +163,18 @@
                     android:textStyle="bold"
                     android:layout_weight="0.5"
                     android:layout_height="wrap_content"
-                    android:text="Once"/>
+                    android:text="Weekly Once"/>
+                <com.google.android.material.button.MaterialButton
+                    style="@style/Widget.Material3.Button.IconButton.Filled.Tonal"
+                    android:id="@+id/modifySubscriptionOrder"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Change Subscription"
+                    app:cornerRadius="4dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/linearLayout14" />
+
+
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"

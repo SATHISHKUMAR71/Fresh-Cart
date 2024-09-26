@@ -99,6 +99,9 @@ class ProductListFragment : Fragment() {
         val view =  inflater.inflate(R.layout.fragment_product_list, container, false)
         val sortAndFilterLayout = view.findViewById<LinearLayout>(R.id.linearLayout15)
         fileDir = File(requireContext().filesDir,"AppImages")
+        productListViewModel = ViewModelProvider(this,
+            ProductListViewModelFactory(AppDatabase.getAppDatabase(requireContext()).getUserDao())
+        )[ProductListViewModel::class.java]
         adapter = ProductListAdapter(this,fileDir,"P",false,productListViewModel)
         adapter.stateRestorationPolicy = RecyclerView.Adapter.StateRestorationPolicy.ALLOW
         filterCountText = view.findViewById(R.id.filterCountTextView)
@@ -143,9 +146,7 @@ class ProductListFragment : Fragment() {
         val exploreCategoryButton = view.findViewById<MaterialButton>(R.id.categoryButtonProductList)
         val sortButton = view.findViewById<MaterialButton>(R.id.sortButton)
         val filterButton = view.findViewById<MaterialButton>(R.id.filterButton)
-        productListViewModel = ViewModelProvider(this,
-            ProductListViewModelFactory(AppDatabase.getAppDatabase(requireContext()).getUserDao())
-        )[ProductListViewModel::class.java]
+
         searchViewOpened = (arguments?.getBoolean("searchViewOpened")==true)
         productListViewModel.getCartItems(MainActivity.cartId.toInt())
 

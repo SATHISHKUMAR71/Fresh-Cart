@@ -14,6 +14,7 @@ import android.widget.RadioButton
 import android.widget.RadioGroup
 import android.widget.ScrollView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -356,6 +357,7 @@ class OrderSummaryFragment : Fragment() {
                     }
                 }
             }
+            Toast.makeText(context,"Delivery Subscription Updated Successfully",Toast.LENGTH_SHORT).show()
             parentFragmentManager.popBackStack()
             parentFragmentManager.popBackStack()
         }

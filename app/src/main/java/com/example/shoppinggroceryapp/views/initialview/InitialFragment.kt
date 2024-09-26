@@ -96,7 +96,7 @@ class InitialFragment : Fragment() {
         // Inflate the layout for this fragment
 
         val view =  inflater.inflate(R.layout.fragment_initial, container, false)
-        val initialViewModel = ViewModelProvider(this)[InitialFragmentViewModel::class.java]
+        val initialViewModel = InitialDataSetter()
         var searchViewModel = ViewModelProvider(this,
             SearchViewModelFactory(AppDatabase.getAppDatabase(requireContext()).getUserDao())
         )[SearchViewModel::class.java]

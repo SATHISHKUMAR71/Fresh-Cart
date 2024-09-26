@@ -14,12 +14,14 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.collection.LruCache
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.ViewModelProvider
 import com.example.shoppinggroceryapp.views.initialview.InitialFragment
 import com.example.shoppinggroceryapp.views.sharedviews.authenticationviews.login.LoginFragment
 import com.example.shoppinggroceryapp.model.dao.UserDao
 import com.example.shoppinggroceryapp.model.database.AppDatabase
 import com.example.shoppinggroceryapp.model.database.AppDatabase.Companion.getAppDatabase
 import com.example.shoppinggroceryapp.model.entities.order.CartMapping
+import com.example.shoppinggroceryapp.views.initialview.InitialDataSetter
 
 
 class MainActivity : AppCompatActivity() {
@@ -49,14 +51,9 @@ class MainActivity : AppCompatActivity() {
             getAppDatabase(baseContext).getUserDao().initDB()
         }.start()
         val pref = getSharedPreferences("freshCart", Context.MODE_PRIVATE)
+        var initialDataSetter = InitialDataSetter()
+        initialDataSetter.setInitialDataForUser(pref)
         val boo = pref.getBoolean("isSigned",false)
-        isRetailer = pref.getBoolean("isRetailer",false)
-        userFirstName = pref.getString("userFirstName","User").toString()
-        userLastName = pref.getString("userLastName","User").toString()
-        userId = pref.getString("userId","userId").toString()
-        userEmail = pref.getString("userEmail","userEmail").toString()
-        userPhone = pref.getString("userPhone","userPhone").toString()
-        userImage = pref.getString("userProfile","userImage").toString()
         if(boo){
             supportFragmentManager.beginTransaction()
                 .replace(R.id.fragmentBody, InitialFragment())

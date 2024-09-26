@@ -204,7 +204,7 @@ class ProductListAdapter(var fragment: Fragment,
 
                 }
                 else {
-//                        val product = productList[position].copy(availableItems = productList[position].availableItems+1)
+//                    val product = productList[position].copy(availableItems = productList[position].availableItems+1)
 //                        retailerDb.updateProduct(product)
                     productListViewModel.updateItemsInCart(
                         if(productList[position].offer==-1f) {
