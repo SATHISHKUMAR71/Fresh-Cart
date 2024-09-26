@@ -3,6 +3,7 @@ package com.example.shoppinggroceryapp
 import android.Manifest
 import android.content.Context
 import android.content.pm.PackageManager
+import android.graphics.Bitmap
 import android.os.Build
 import android.os.Bundle
 import android.os.Handler
@@ -10,21 +11,15 @@ import android.os.Looper
 import android.widget.FrameLayout
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
+import androidx.collection.LruCache
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import androidx.fragment.app.FragmentManager
-import androidx.room.RoomDatabase.Callback
-import androidx.sqlite.db.SupportSQLiteDatabase
-import com.example.shoppinggroceryapp.fragments.appfragments.InitialFragment
-import com.example.shoppinggroceryapp.fragments.authentication.LoginFragment
+import com.example.shoppinggroceryapp.views.appfragments.InitialFragment
+import com.example.shoppinggroceryapp.views.authentication.LoginFragment
 import com.example.shoppinggroceryapp.model.dao.UserDao
 import com.example.shoppinggroceryapp.model.database.AppDatabase
 import com.example.shoppinggroceryapp.model.database.AppDatabase.Companion.getAppDatabase
 import com.example.shoppinggroceryapp.model.entities.order.CartMapping
-import com.example.shoppinggroceryapp.model.entities.products.BrandData
-import com.example.shoppinggroceryapp.model.entities.products.Category
-import com.example.shoppinggroceryapp.model.entities.products.ParentCategory
-import com.example.shoppinggroceryapp.model.entities.products.Product
 
 
 class MainActivity : AppCompatActivity() {
@@ -39,6 +34,7 @@ class MainActivity : AppCompatActivity() {
         var userLastName = ""
         var userId = "-1"
         var userEmail = ""
+        var imageCache = LruCache<String,Bitmap>((Runtime.getRuntime().maxMemory()/4).toInt())
         var userPhone = ""
         var cartId = 0
         var userImage = ""

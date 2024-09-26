@@ -5,7 +5,7 @@
     android:layout_marginTop="80dp"
     android:layout_marginBottom="80dp"
     android:layout_height="match_parent"
-    tools:context=".fragments.appfragments.CategoryFragment">
+    tools:context=".views.appfragments.CategoryFragment">
 
 
     <androidx.recyclerview.widget.RecyclerView

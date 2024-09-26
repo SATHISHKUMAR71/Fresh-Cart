@@ -1,8 +1,6 @@
 package com.example.shoppinggroceryapp.viewmodel.filterviewmodel
 
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.shoppinggroceryapp.fragments.appfragments.OfferFragment
 import com.example.shoppinggroceryapp.model.dao.UserDao
 import com.example.shoppinggroceryapp.model.entities.products.Product
 

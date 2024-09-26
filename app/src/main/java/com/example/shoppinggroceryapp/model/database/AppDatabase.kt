@@ -2,15 +2,13 @@ package com.example.shoppinggroceryapp.model.database
 
 import android.content.Context
 import android.graphics.BitmapFactory
-import androidx.core.content.ContextCompat
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.sqlite.db.SupportSQLiteDatabase
 import com.example.shoppinggroceryapp.MIGRATION_4_5
 import com.example.shoppinggroceryapp.R
-import com.example.shoppinggroceryapp.fragments.ImageLoaderAndGetter
-import com.example.shoppinggroceryapp.fragments.MIGRATION_3_4
+import com.example.shoppinggroceryapp.views.ImageLoaderAndGetter
 import com.example.shoppinggroceryapp.model.dao.ProductDao
 import com.example.shoppinggroceryapp.model.dao.RetailerDao
 import com.example.shoppinggroceryapp.model.dao.UserDao

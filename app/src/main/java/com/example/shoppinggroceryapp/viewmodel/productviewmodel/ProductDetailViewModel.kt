@@ -1,13 +1,9 @@
 package com.example.shoppinggroceryapp.viewmodel.productviewmodel
 
-import android.content.SharedPreferences
-import android.provider.ContactsContract.CommonDataKinds.Im
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.shoppinggroceryapp.MainActivity
-import com.example.shoppinggroceryapp.fragments.appfragments.productfragments.ProductListFragment
 import com.example.shoppinggroceryapp.model.dao.RetailerDao
-import com.example.shoppinggroceryapp.model.dao.UserDao
 import com.example.shoppinggroceryapp.model.entities.order.Cart
 import com.example.shoppinggroceryapp.model.entities.products.DeletedProductList
 import com.example.shoppinggroceryapp.model.entities.products.Images

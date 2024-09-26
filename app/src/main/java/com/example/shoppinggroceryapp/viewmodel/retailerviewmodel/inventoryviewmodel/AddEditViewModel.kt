@@ -1,13 +1,8 @@
 package com.example.shoppinggroceryapp.viewmodel.retailerviewmodel.inventoryviewmodel
 
-import android.graphics.Bitmap
-import android.view.View
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.shoppinggroceryapp.MainActivity
-import com.example.shoppinggroceryapp.fragments.ImageLoaderAndGetter
-import com.example.shoppinggroceryapp.fragments.appfragments.productfragments.ProductDetailFragment
-import com.example.shoppinggroceryapp.fragments.appfragments.productfragments.ProductListFragment
+import com.example.shoppinggroceryapp.views.appfragments.productfragments.ProductListFragment
 import com.example.shoppinggroceryapp.model.dao.ProductDao
 import com.example.shoppinggroceryapp.model.dao.RetailerDao
 import com.example.shoppinggroceryapp.model.entities.products.BrandData

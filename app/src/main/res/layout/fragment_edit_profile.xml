@@ -5,7 +5,7 @@
     android:orientation="vertical"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".fragments.appfragments.accountfragments.EditProfile">
+    tools:context=".views.sharedviews.EditProfile">
 
 
     <com.google.android.material.appbar.AppBarLayout

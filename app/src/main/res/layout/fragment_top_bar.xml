@@ -5,7 +5,7 @@
     android:id="@+id/appTopBarLayout"
     android:layout_width="match_parent"
     android:layout_height="?attr/actionBarSize"
-    tools:context=".fragments.topbar.TopBarFragment">
+    tools:context=".views.topbar.TopBarFragment">
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/appTopBar"
         android:layout_width="match_parent"

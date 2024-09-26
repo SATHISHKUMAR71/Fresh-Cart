@@ -2,10 +2,8 @@ package com.example.shoppinggroceryapp.viewmodel.orderviewmodel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.shoppinggroceryapp.fragments.DateGenerator
+import com.example.shoppinggroceryapp.views.DateGenerator
 import com.example.shoppinggroceryapp.model.dao.RetailerDao
-import com.example.shoppinggroceryapp.model.dao.UserDao
-import com.example.shoppinggroceryapp.model.entities.order.Cart
 import com.example.shoppinggroceryapp.model.entities.order.CartMapping
 import com.example.shoppinggroceryapp.model.entities.order.DailySubscription
 import com.example.shoppinggroceryapp.model.entities.order.MonthlyOnce
@@ -13,7 +11,6 @@ import com.example.shoppinggroceryapp.model.entities.order.OrderDetails
 import com.example.shoppinggroceryapp.model.entities.order.TimeSlot
 import com.example.shoppinggroceryapp.model.entities.order.WeeklyOnce
 import com.example.shoppinggroceryapp.model.entities.products.CartWithProductData
-import java.net.IDN
 
 class OrderSuccessViewModel(var retailerDao: RetailerDao):ViewModel() {
     val lock = Any()
