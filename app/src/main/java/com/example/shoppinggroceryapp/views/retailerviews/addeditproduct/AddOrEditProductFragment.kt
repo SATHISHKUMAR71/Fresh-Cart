@@ -487,6 +487,7 @@ class AddOrEditProductFragment : Fragment() {
                         )
                     }
                     if (isCategoryImageAdded) {
+
                         addEditProductViewModel.updateInventory(
                             brandNameStr,
                             (ProductListFragment.selectedProduct.value == null),

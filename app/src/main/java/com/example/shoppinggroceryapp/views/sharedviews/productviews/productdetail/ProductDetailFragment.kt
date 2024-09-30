@@ -86,6 +86,7 @@ class ProductDetailFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val view =  inflater.inflate(R.layout.fragment_product_detail, container, false)
+        println("ON PRODUCT DETAIL VALUE: ${ProductListFragment.selectedProduct.value}")
         val viewPager = view.findViewById<ViewPager2>(R.id.productImageViewer)
         productDetailToolBar = view.findViewById<MaterialToolbar>(R.id.productDetailToolbar)
 //        cartViewModel = CartViewModel(AppDatabase.getAppDatabase(requireContext()).getUserDao())
@@ -362,7 +363,8 @@ class ProductDetailFragment : Fragment() {
             if(once==0) {
                 selectedProductList.add(selectedProduct)
             }
-            if((oneTimeFragmentIn==0) || (backNavigated)) {
+            if((oneTimeFragmentIn==0) || (backNavigated) || (MainActivity.isRetailer)) {
+                println("ON PRODUCT DETAIL VALUE Observer value: one time: $oneTimeFragmentIn  back: $backNavigated ${this.hashCode()} ${ProductListFragment.selectedProduct.value?.productName} ${selectedProduct.productName}")
                 productDetailToolBar.title = selectedProduct.productName
                 view?.findViewById<TextView>(R.id.productDescriptionProductDetail)?.text =
                     selectedProduct.productDescription
